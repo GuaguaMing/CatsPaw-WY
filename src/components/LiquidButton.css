@@ -1,24 +1,21 @@
 .liquid-button {
   display: flex;
-  width: 120px;
-  height: 60px;
-  padding: 11.143px 21.357px;
+  padding: 0.5rem 4rem;
   justify-content: center;
   align-items: center;
-  gap: 14.857px;
-  border-radius: 16px;
-  background-blend-mode: plus-lighter;
-  box-shadow:
-    5.571px 5.571px 0.929px -6.5px rgba(255, 255, 255, 0.5) inset,
-    3.714px 3.714px 1.857px -3.714px #b3b3b3 inset,
-    -3.714px -3.714px 1.857px -3.714px #b3b3b3 inset,
-    0px 0px 0px 1.857px #999 inset,
-    0px 0px 40.857px 0px rgba(242, 242, 242, 0.5) inset;
-  backdrop-filter: blur(5px);
+  background-color: #1a1a1a;
   position: relative;
   cursor: pointer;
   transition: all 0.2s ease;
-  background-color: #1a1a1a;
+  box-shadow:
+    7px 7px 20px 0px rgba(255, 255, 255, 0.3) inset,
+    8px -10px 20px 0px rgba(255, 159, 115, 0.685) inset,
+    20px 0px 10px 3px rgba(75, 75, 75, 0.404) inset,
+    19px 3px 10px 0px rgba(153, 153, 153, 0.63) inset,
+    10px -20px 10px 0px rgba(242, 242, 242, 0.37) inset;
+  backdrop-filter: blur(5px);
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .liquid-effect {
@@ -47,6 +44,15 @@
   position: relative;
   z-index: 1;
 }
+
+.liquid-button:hover {
+  transform: scale(1.05);
+}
+
+.liquid-button:active {
+  transform: scale(0.95);
+} 
+
 
 @media (max-width: 991px) {
   .liquid-button {

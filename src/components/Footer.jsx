@@ -1,5 +1,6 @@
 import React from "react";
 import "./Nav.css";
+import SquareLiquidButton from './SquareLiquidButton';
 
 const Footer = () => {
   return (
@@ -17,18 +18,19 @@ const Footer = () => {
         />
         {/* 主視圖圖片 */}
         <img
-          src="./public/A_mainview.png"
+          src={`${import.meta.env.BASE_URL}images/A_mainview.png`}
           className="w-full object-contain mb-8"
           alt="Main View"
         />
       </div>
-      
+
       {/* Footer 區塊 */}
       <div className="relative flex justify-between items-end w-full px-8 pb-8">
         {/* 左側 Logo */}
         <img
-          src="./public/A_producttag12.png"
+          src={`${import.meta.env.BASE_URL}images/A_producttag12.png`}
           className="object-contain shrink-0 aspect-square w-[85px]"
+          alt="Product Tag"
         />
 
         {/* 中間版權文字 */}
@@ -39,24 +41,40 @@ const Footer = () => {
         {/* 右側 Logo 和社群按鈕 */}
         <div className="flex gap-4 items-center">
           <img
-            src="./public/A_logo_white.png"
+            src={`${import.meta.env.BASE_URL}images/A_logo_white.png`}
             className="object-contain shrink-0 self-stretch my-auto aspect-[1.48] w-[62px]"
+            alt="Logo"
           />
           <div className="nav-container !p-0 !gap-4">
-            {/* Instagram */}
-            <div className="flex overflow-hidden gap-4 justify-center items-center self-stretch px-3.5 my-auto rounded-2xl bg-zinc-900 h-[60px] w-[60px]">
-              <img
-                src="./public/A_community_ins.png"
-                className="object-contain self-stretch my-auto aspect-[1.03] w-[33px]"
-              />
-            </div>
-            {/* YouTube */}
-            <div className="flex overflow-hidden gap-4 justify-center items-center self-stretch px-3.5 my-auto rounded-2xl bg-zinc-900 h-[60px] w-[60px]">
-              <img
-                src="./public/A_community_yt.png"
-                className="object-contain self-stretch my-auto aspect-[1.03] w-[33px]"
-              />
-            </div>
+            {/* Instagram 按鈕 */}
+            <a
+              href="https://www.instagram.com/wywy_studio/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <SquareLiquidButton>
+                <img
+                  src={`${import.meta.env.BASE_URL}images/A_community_ins.png`}
+                  className="w-[33px] h-[33px] object-contain"
+                  alt="Instagram"
+                />
+              </SquareLiquidButton>
+            </a>
+
+            {/* YouTube 按鈕 */}
+            <a
+              href="https://www.youtube.com/@wywy_studio"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <SquareLiquidButton>
+                <img
+                  src={`${import.meta.env.BASE_URL}images/A_community_yt.png`}
+                  className="w-[33px] h-[33px] object-contain"
+                  alt="YouTube"
+                />
+              </SquareLiquidButton>
+            </a>
           </div>
         </div>
       </div>

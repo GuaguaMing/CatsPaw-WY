@@ -7,11 +7,11 @@ const Home = () => {
     <div className="flex flex-col items-center justify-center bg-black text-white">
       {/* 主視覺影片區 */}
       <video
-        src="/Cat's_Paw_Trailers.mp4"
+        src={`${import.meta.env.BASE_URL}videos/Cat's_Paw_Trailers.mp4`}
         autoPlay
         loop
         muted
-        className="w-full h-auto object-cover"
+        className="w-full h-full object-cover"
       />
 
       {/* Nav 按鈕列 */}
@@ -46,10 +46,9 @@ const Home = () => {
           {[1, 2, 3, 4, 5].map((i) => (
             <img
               key={`/P1_00${i}.png`}
-              src={`/P1_00${i}.png`}
-              alt={`Game screenshot ${i}`}
-              effect="blur"
-              className="rounded-lg object-contain max-w-[450px] w-full mx-auto"
+              src={`${import.meta.env.BASE_URL}images/P1_00${i}.png`}
+              alt={`Product ${i}`}
+              className="w-full h-auto"
             />
           ))}
         </div>
@@ -67,8 +66,8 @@ const Home = () => {
             <h1 className="text-4xl font-bold mb-4">遊戲特色</h1>
             <p className="text-lg leading-relaxed">
               以蠟作為核心，加入貓咪與獵奇的元素， 呈現出不同的玩法與機制。整體玩法圍繞著「蠟」的，不僅僅是玩法上的吐蠟和對物件起作用的吐蠟，許多角色與場景也融合了蠟的
-              概念， 讓「蠟」成為了貫穿Cat’sPaw 的重點。<br /><br />
-              帶有詭異的可愛風格是Cat’s Paw 這個遊戲最大的特色之一，懵懂純真的巴非對比陰暗詭譎的蠟燭工廠，創造出衝突與刺激感，激發出玩家想要探索這個遊戲的動力。生動可愛的角色與藏著各種彩蛋的場景等待玩家挖掘出來並細細品味。
+              概念， 讓「蠟」成為了貫穿Cat's Paw 的重點。<br /><br />
+              帶有詭異的可愛風格是Cat's Paw 這個遊戲最大的特色之一，懵懂純真的巴非對比陰暗詭譎的蠟燭工廠，創造出衝突與刺激感，激發出玩家想要探索這個遊戲的動力。生動可愛的角色與藏著各種彩蛋的場景等待玩家挖掘出來並細細品味。
             </p>
           </div>
         </div>
