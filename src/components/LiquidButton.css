@@ -1,0 +1,91 @@
+.liquid-button {
+  display: flex;
+  width: 120px;
+  height: 60px;
+  padding: 11.143px 21.357px;
+  justify-content: center;
+  align-items: center;
+  gap: 14.857px;
+  border-radius: 16px;
+  background-blend-mode: plus-lighter;
+  box-shadow:
+    5.571px 5.571px 0.929px -6.5px rgba(255, 255, 255, 0.5) inset,
+    3.714px 3.714px 1.857px -3.714px #b3b3b3 inset,
+    -3.714px -3.714px 1.857px -3.714px #b3b3b3 inset,
+    0px 0px 0px 1.857px #999 inset,
+    0px 0px 40.857px 0px rgba(242, 242, 242, 0.5) inset;
+  backdrop-filter: blur(5px);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #1a1a1a;
+}
+
+.liquid-effect {
+  width: 195px;
+  height: 135px;
+  position: absolute;
+  left: -37.54px;
+  bottom: -38.03px;
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+  background-color: rgba(217, 217, 217, 0.1);
+}
+
+.button-label {
+  font-family:
+    "SF Pro",
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 590;
+  font-size: 22px;
+  color: #fff;
+  line-height: 30px;
+  letter-spacing: -0.186px;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 991px) {
+  .liquid-button {
+    width: 100px;
+    height: 50px;
+    padding: 9px 18px;
+  }
+
+  .liquid-effect {
+    width: 160px;
+    height: 110px;
+    left: -30px;
+    bottom: -30px;
+  }
+
+  .button-label {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .liquid-button {
+    width: 100%;
+    height: 50px;
+    padding: 12px 20px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .liquid-effect {
+    width: 120px;
+    height: 80px;
+    left: -10px;
+    bottom: -15px;
+  }
+
+  .button-label {
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
