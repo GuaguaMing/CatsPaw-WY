@@ -6,13 +6,13 @@ import './Nav.css';
 const Nav = () => {
   return (
     <div
-    className={`
-      fixed top-0 left-0 w-full z-50 flex justify-center
-      bg-black relative
+      className={`
+       sticky top-0 left-0 w-full z-50 flex justify-center
+    bg-black
     `}
-  >
-    <div className="nav-container max-w-[1200px] flex items-center gap-[50px] flex-col md:flex-row py-3 relative">
-      {[
+    >
+      <div className="nav-container max-w-[1200px] flex items-center gap-[50px] flex-col md:flex-row py-3 relative">
+        {[
           { text: '故事', path: '/story' },
           { text: '教學', path: '/guide' },
           { text: '角色', path: '/character' },

@@ -18,11 +18,11 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<><Home /><CatRow /><Footer /></>} />
-        <Route path="/story" element={<><div className="w-full flex justify-center"><Nav /></div><Story /><CatRow /><Footer /></>} />
-        <Route path="/guide" element={<><div className="w-full flex justify-center"><Nav /></div><Guide /><CatRow /><Footer /></>} />
-        <Route path="/character" element={<><div className="w-full flex justify-center"><Nav /></div><Character /><CatRow /><Footer /></>} />
-        <Route path="/scene" element={<><div className="w-full flex justify-center"><Nav /></div><Scene /><CatRow /><Footer /></>} />
-        <Route path="/designtoy" element={<><div className="w-full flex justify-center"><Nav /></div><Designtoy /><CatRow /><Footer /></>} />
+        <Route path="/story" element={<><Nav /><Story /><CatRow /><Footer /></>} />
+        <Route path="/guide" element={<><Nav /><Guide /><CatRow /><Footer /></>} />
+        <Route path="/character" element={<><Nav /><Character /><CatRow /><Footer /></>} />
+        <Route path="/scene" element={<><Nav /><Scene /><CatRow /><Footer /></>} />
+        <Route path="/designtoy" element={<><Nav /><Designtoy /><CatRow /><Footer /></>} />
       </Routes>
     </Router>
   );

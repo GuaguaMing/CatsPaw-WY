@@ -72,6 +72,15 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.custom-padding {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

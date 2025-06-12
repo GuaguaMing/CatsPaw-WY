@@ -15,14 +15,19 @@ const Home = () => {
       />
 
       {/* Nav 按鈕列 */}
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center pt-12 sticky top-0 z-50 bg-black">
         <Nav />
       </div>
 
+      <img
+        src={`${import.meta.env.BASE_URL}images/P1_NoEntry.png`}
+        className="pt-20 -translate-x-4"
+      />
+
       {/* 世界觀區塊 */}
-      <section className="max-w-5xl px-6 py-12 text-center">
+      <section className="max-w-5xl px-6 py-12 text-center mx-auto">
         <h1 className="text-4xl font-bold mb-4">遊戲世界觀<br /><br /></h1>
-        <p className="text-lg leading-relaxed text-left">
+        <p className="text-lg leading-[3.5rem] text-center">
           這是其中一個平行世界。
           <br /><br />
           於現今的19世紀初，人類已完全滅絕，獨留豐富的大自然與生態、以及沉眠於南太平洋的邪神克蘇魯。
@@ -40,9 +45,9 @@ const Home = () => {
       </section>
 
       {/* 下方兩欄區塊：左圖 + 右文字 */}
-      <section className="max-w-6xl px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-12">
+      <section className="max-w-6xl px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-60">
         {/* 左圖五張 */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 w-[450px]">
           {[1, 2, 3, 4, 5].map((i) => (
             <img
               key={`/P1_00${i}.png`}
@@ -54,17 +59,17 @@ const Home = () => {
         </div>
 
         {/* 右文字區 */}
-        <div className="space-y-12">
+        <div className="flex flex-col justify-around custom-padding w-[400px]">
           <div>
             <h1 className="text-4xl font-bold mb-4">遊戲簡介</h1>
-            <p className="text-lg leading-relaxed">
+            <p className="text-lg leading-[3.5rem]">
               貓蠟怪巴非的甦醒，被安排到蠟燭工廠就職，並在前輩的引導下開始製作蠟燭。<br /><br />
               然而在工作途中發現許多古怪的地方， 非工作區徘徊的不明瑕疵品、危險至極的謎之生物、詭譎的環境， 讓巴非萌生出想要逃離的念頭……。
             </p>
           </div>
           <div>
             <h1 className="text-4xl font-bold mb-4">遊戲特色</h1>
-            <p className="text-lg leading-relaxed">
+            <p className="text-lg leading-[3.5rem]">
               以蠟作為核心，加入貓咪與獵奇的元素， 呈現出不同的玩法與機制。整體玩法圍繞著「蠟」的，不僅僅是玩法上的吐蠟和對物件起作用的吐蠟，許多角色與場景也融合了蠟的
               概念， 讓「蠟」成為了貫穿Cat's Paw 的重點。<br /><br />
               帶有詭異的可愛風格是Cat's Paw 這個遊戲最大的特色之一，懵懂純真的巴非對比陰暗詭譎的蠟燭工廠，創造出衝突與刺激感，激發出玩家想要探索這個遊戲的動力。生動可愛的角色與藏著各種彩蛋的場景等待玩家挖掘出來並細細品味。
