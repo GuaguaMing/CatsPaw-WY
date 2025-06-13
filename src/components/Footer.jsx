@@ -53,7 +53,7 @@ const Footer = () => {
               rel="noopener noreferrer"
             >
               <SquareLiquidButton>
-                <img
+          <img
                   src={`${import.meta.env.BASE_URL}images/A_community_ins.png`}
                   className="w-[33px] h-[33px] object-contain"
                   alt="Instagram"
@@ -72,7 +72,7 @@ const Footer = () => {
                   src={`${import.meta.env.BASE_URL}images/A_community_yt.png`}
                   className="w-[33px] h-[33px] object-contain"
                   alt="YouTube"
-                />
+          />
               </SquareLiquidButton>
             </a>
           </div>

@@ -30,7 +30,7 @@ const Guide = () => {
 
       <div className="pt-20 w-full  max-w-[1440px] mx-auto flex flex-col items-center">
         <video
-          src={`${import.meta.env.BASE_URL}videos/Cat's_Paw_HowToPlay.mp4`}
+          src={`${import.meta.env.BASE_URL}videos/Cat's_Paw_howToPlay.mp4`}
           autoPlay
           loop
           muted
