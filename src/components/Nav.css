@@ -1,6 +1,8 @@
 .nav-container {
-  position: relative; /* 加這行才能讓 ::after 定位正確 */
+  position: relative;
+  /* 加這行才能讓 ::after 定位正確 */
   display: flex;
+  flex-direction: column;
   padding: 50px 40px;
   align-items: center;
   gap: 50px;
@@ -16,14 +18,5 @@
     gap: 30px;
     flex-wrap: wrap;
     justify-content: center;
-  }
-}
-
-@media (max-width: 640px) {
-  .nav-container {
-    padding: 20px 15px;
-    gap: 15px;
-    flex-direction: column;
-    align-items: stretch;
   }
 }

@@ -5,6 +5,7 @@ const Character = () => {
   return (
     <div className="flex flex-col items-center justify-center bg-black text-white min-h-screen">
       <h1 className="text-4xl font-bold mb-4">遊戲角色</h1>
+      <p>版面施工中...!</p>
 
       <div className="flex flex-col items-center justify-center min-h-screen">{/* 巴非 */}
         <h1 className="text-4xl font-bold mb-4"> Parfait  巴非</h1>
@@ -120,79 +121,73 @@ const Character = () => {
         <h1 className="text-4xl font-bold mb-4"> Mr.Shadow  影子先生(第一型態)</h1>
 
         <p className="text-lg"> #做事看心情 #高智商輾壓 #紳士#狡詐 #無善惡和道德觀念 #最傑出影帝</p>
-        <img
-          src={`${import.meta.env.BASE_URL}images/p4_Boss.png`}
-          className="pt-20 -translate-x-4"
-        />
-        <p className="text-lg">
-          影子先生是蠟燭工廠的老闆，為了進行模擬實驗，祂創造融合了許多不同品種的貓蠟怪，有的靈魂反應
-          失敗淪為失敗品，有的靈魂反應成功便投入工廠進行下一輪的實驗。
-          <br />
-          巴非的出現吸引了影子先生的注意力，與其他的實驗品截然不同......。
-          <br />
-          第一型態的影子先生上半身是以鱷魚的形象出現，都說鱷魚掉的眼淚是假的，這也很好的去說明影子大
-          人冷漠無情的性格與精湛的演技。影子大人從來都不吝嗇於展現出祂的暴力美學，於是下半身便保持了繁多的
-          觸手與看起來非常具有威脅性的森森利齒。</p>
+
+        <div className='flex gap-8 mt-8'>
+          {/* 左文字 */}
+          <div className='flex-1'>
+            <p className="text-lg">
+              影子先生是蠟燭工廠的老闆，為了進行模擬實驗，祂創造融合了許多不同品種的貓蠟怪，有的靈魂反應
+              失敗淪為失敗品，有的靈魂反應成功便投入工廠進行下一輪的實驗。
+              <br />
+              巴非的出現吸引了影子先生的注意力，與其他的實驗品截然不同......。
+              <br />
+              第一型態的影子先生上半身是以鱷魚的形象出現，都說鱷魚掉的眼淚是假的，這也很好的去說明影子大
+              人冷漠無情的性格與精湛的演技。影子大人從來都不吝嗇於展現出祂的暴力美學，於是下半身便保持了繁多的
+              觸手與看起來非常具有威脅性的森森利齒。</p>
+          </div>
+          {/* 右圖片 */}
+          <div className='flex-strink-0'>
+            <img
+              src={`${import.meta.env.BASE_URL}images/p4_Boss.png`}
+              className="w-auto h-[400px] object-contain"
+              alt="Boss"
+            />
+          </div>
+        </div>
       </div>
 
       <div>{/* 影子2 */}
         <h1 className="text-4xl font-bold mb-4"> Mr.Shadow  影子先生(第二型態)</h1>
 
         <p className="text-lg">  #做事看心情 #高智商輾壓 #紳士 #狡詐 #無善惡和道德觀念 #最傑出影帝</p>
-        <div className="flex flex-col gap-8 mt-8">
-          {/* 上排兩張圖片 */}
-          <div className="flex justify-center gap-8">
+        <div className="flex flex-row gap-8 mt-8">
+          {/* 左圖片 */}
+          <div className="flex-strink-0">
             <img
               src={`${import.meta.env.BASE_URL}images/p4_Boss_pro.png`}
-              className="w-auto h-[300px] object-contain"
+              className="w-auto h-[500px] object-contain"
               alt="Boss Pro"
             />
-            <img
-              src={`${import.meta.env.BASE_URL}images/p4_Boss_attack.png`}
-              className="w-auto h-[300px] object-contain"
-              alt="Boss Attack"
-            />
           </div>
-          {/* 下排三張圖片 */}
-          <div className="flex justify-center gap-8">
-            <img
-              src={`${import.meta.env.BASE_URL}images/p4_Boss_die.png`}
-              className="w-auto h-[300px] object-contain"
-              alt="Boss Die"
-            />
-            <img
-              src={`${import.meta.env.BASE_URL}images/p4_Boss_walk.png`}
-              className="w-auto h-[300px] object-contain"
-              alt="Boss Walk"
-            />
-            <img
-              src={`${import.meta.env.BASE_URL}images/p4_Boss_jump.png`}
-              className="w-auto h-[300px] object-contain"
-              alt="Boss Jump"
-            />
+
+          {/* 右文字 */}
+          <div className='flex-1'>
+            <p className="text-lg">
+              第二型態的影子先生更為暴露出祂原本的性格，與被束縛隱藏的第一型態不同，這個型態的祂做事更隨
+              心所欲和自由。
+              <br />
+              與第一型態的鱷魚元素不同，第二型態加入了蛇尾巴，並把嘴巴更是直接堂而皇之地擺在最中央，做為
+              本體的眼睛被放在上方，周邊甚至環繞著神聖的翅膀與光環。對比強烈的下半身猙獰獵奇的巨嘴與毫不掩飾的
+              利口，隨著擺動的觸手中更是每個鑲嵌著眼珠子。</p>
           </div>
         </div>
-        <p className="text-lg">
-          第二型態的影子先生更為暴露出祂原本的性格，與被束縛隱藏的第一型態不同，這個型態的祂做事更隨
-          心所欲和自由。
-          <br />
-          與第一型態的鱷魚元素不同，第二型態加入了蛇尾巴，並把嘴巴更是直接堂而皇之地擺在最中央，做為
-          本體的眼睛被放在上方，周邊甚至環繞著神聖的翅膀與光環。對比強烈的下半身猙獰獵奇的巨嘴與毫不掩飾的
-          利口，隨著擺動的觸手中更是每個鑲嵌著眼珠子。</p>
+
       </div>
 
       <div>{/* 失敗殼 */}
         <h1 className="text-4xl font-bold mb-4"> Failed Product  貓蠟怪</h1>
 
         <p className="text-lg"> #空殼 #無意識 #見到就咬 #被控制</p>
-        <img
-          src={`${import.meta.env.BASE_URL}images/p4_product_walk.gif`}
-          className="pt-20 -translate-x-4"
-        />
-        <img
-          src={`${import.meta.env.BASE_URL}images/p4_product_attack.gif`}
-          className="pt-20 -translate-x-4"
-        />
+        <div className='flex justify-center gap-8 mt-8'>
+          <img
+            src={`${import.meta.env.BASE_URL}images/p4_product_walk.gif`}
+            className="pt-20 -translate-x-4"
+          />
+          <img
+            src={`${import.meta.env.BASE_URL}images/p4_product_attack.gif`}
+            className="pt-20 -translate-x-4"
+          />
+        </div>
         <p className="text-lg">
           以貓咪的身體與蠟互相融合的實驗產品，只是在放入靈魂時因為反應失敗而變成沒有意識的失敗品貓蠟
           怪。貓蠟怪見到任何會動的東西就會咬，一咬一個頭，攻擊力高。牠能被影子先生操控，不過影子先生通常懶
