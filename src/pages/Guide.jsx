@@ -1,6 +1,6 @@
 import Reveal from '../components/Reveal';
 import VideoPlayer from '../components/VideoPlayer';
-import { img, video } from '../lib/asset';
+import { img } from '../lib/asset';
 
 const controls = [
   { image: 'P3_001.webp', alt: '左搖桿左右推動示意', keys: [{ key: '左搖桿', action: '左右移動', wide: true }] },
@@ -62,7 +62,7 @@ const Guide = () => (
     <section className="page-container pb-36">
       <Reveal as="h2" className="t-h2 mb-8">教學影片</Reveal>
       <Reveal>
-        <VideoPlayer src={video("Cat's_Paw_howToPlay.mp4")} poster={img('A_mainview.webp')} label="教學影片" />
+        <VideoPlayer youtubeId="5FONNA6-pkk" label="教學影片" />
       </Reveal>
     </section>
   </>

@@ -1,16 +1,28 @@
 import { useState } from 'react';
+import { youtubeEmbed } from '../lib/asset';
 
-// 先顯示封面，按下播放才載入影片（影片檔動輒數十 MB，不在進頁時下載）
-const VideoPlayer = ({ src, poster, label, className = '' }) => {
+// 先顯示封面，按下播放才載入 YouTube 播放器（不在進頁時下載任何影片資源）
+const VideoPlayer = ({ youtubeId, poster, label, className = '' }) => {
   const [playing, setPlaying] = useState(false);
 
   return (
     <div className={`relative aspect-video w-full overflow-hidden rounded-[20px] bg-surface ${className}`}>
       {playing ? (
-        <video src={src} controls autoPlay playsInline className="h-full w-full bg-black object-contain" />
+        <iframe
+          src={youtubeEmbed(youtubeId)}
+          title={label}
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          allowFullScreen
+          className="h-full w-full border-0"
+        />
       ) : (
         <>
-          <img src={poster} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-45" />
+          <img
+            src={poster ?? `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
+            alt=""
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover opacity-60"
+          />
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
             <button
               type="button"

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
-import { img, video } from '../lib/asset';
+import { img, youtubeEmbed } from '../lib/asset';
 
 const worldBeats = [
   { still: 'P1_001.webp', alt: '黑暗中浮現無數發光的眼睛', title: '人類滅絕之後', text: '這是其中一個平行世界。19 世紀初，人類已完全滅絕，只剩下大自然，與沉眠於南太平洋的邪神克蘇魯。' },
@@ -46,7 +46,13 @@ const TrailerModal = ({ onClose }) => {
         <button type="button" onClick={onClose} aria-label="關閉預告片" className="absolute -top-14 right-0 inline-flex h-11 w-11 items-center justify-center rounded-full border border-wax/30 bg-transparent text-wax hover:border-ember">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
         </button>
-        <video src={video("Cat's_Paw_Trailers.mp4")} controls autoPlay playsInline className="aspect-video w-full rounded-xl bg-black" />
+        <iframe
+          src={youtubeEmbed('MyuN-mGBT7A')}
+          title="Cat's Paw 預告片"
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          allowFullScreen
+          className="aspect-video w-full rounded-xl border-0 bg-black"
+        />
       </div>
     </div>
   );
