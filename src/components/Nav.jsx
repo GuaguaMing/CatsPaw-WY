@@ -1,63 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import LiquidButton from './LiquidButton';
-import './Nav.css';
+import { Link, NavLink } from 'react-router-dom';
+import { img } from '../lib/asset';
 
-const Nav = () => {
-  const location = useLocation();
-  const [isOpen, setIsOpen] = useState(false);
+const links = [
+  { text: '故事', path: '/story' },
+  { text: '教學', path: '/guide' },
+  { text: '角色', path: '/character' },
+  { text: '場景', path: '/scene' },
+  { text: '公仔', path: '/designtoy' },
+];
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    setIsOpen(false); // 切換頁面時自動收起選單
-  }, [location]);
+const Nav = () => (
+  <header className="sticky top-0 z-50 border-b border-wax/[0.08] bg-ground/[0.88] backdrop-blur-md">
+    <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-3 md:px-8 lg:px-14">
+      <Link to="/" className="flex min-h-11 items-center gap-3 text-wax no-underline">
+        <img src={img('A_logo_white.png')} alt="" className="h-8 w-auto" />
+        <span className="font-latin text-xl font-bold tracking-[0.08em]">Cat&apos;s Paw</span>
+      </Link>
 
-  return (
-    <div className="sticky top-0 left-0 w-full z-50 bg-black">
-      {/* 上方區塊：Logo + 漢堡選單 */}
-      <div className="flex items-center justify-between px-4 py-3 lg:px-10 lg:py-4">
-        <Link to="/" className="flex items-center">
-          <img
-            src={`${import.meta.env.BASE_URL}images/A_logo_white.png`}
-            className="h-12"
-            alt="Cat's Paw Logo"
-          />
-        </Link>
-
-        {/* 漢堡按鈕 */}
-        <button
-          className="text-white text-2xl lg:hidden"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle navigation"
-        >
-          ☰
-        </button>
-      </div>
-
-      {/* 導覽列區塊 */}
-      <div
-        className={`nav-container flex-col items-center gap-4 transition-all duration-300 ease-in-out
-          ${isOpen ? 'flex' : 'hidden'} 
-          lg:flex lg:flex-row lg:justify-center lg:gap-6 lg:py-2`}
-      >
-        {[
-          { text: '故事', path: '/story' },
-          { text: '教學', path: '/guide' },
-          { text: '角色', path: '/character' },
-          { text: '場景', path: '/scene' },
-          { text: '公仔', path: '/designtoy' }
-        ].map((item) => (
-          <Link
-            key={item.text}
+      <nav aria-label="主選單" className="-mx-1 flex gap-1.5 overflow-x-auto px-1 sm:mx-0 sm:px-0">
+        {links.map((item) => (
+          <NavLink
+            key={item.path}
             to={item.path}
-            className="nav-btn w-full max-w-[300px] lg:w-auto"
+            className={({ isActive }) =>
+              `inline-flex min-h-11 shrink-0 items-center rounded-full px-4 text-base no-underline transition-colors sm:px-5 ${
+                isActive
+                  ? 'liquid-glow bg-ember/[0.12] font-bold text-ember-light'
+                  : 'font-medium text-[#CFC5B6] hover:text-ember-light'
+              }`
+            }
           >
-            <LiquidButton label={item.text} />
-          </Link>
+            {item.text}
+          </NavLink>
         ))}
-      </div>
+      </nav>
     </div>
-  );
-};
+  </header>
+);
 
 export default Nav;

@@ -1,193 +1,201 @@
-import React from 'react';
+import Reveal from '../components/Reveal';
+import { img } from '../lib/asset';
+
+const chapters = [
+  { id: 'ch-origin', glyph: '起', label: '影子的實驗' },
+  { id: 'ch-stages', glyph: '承', label: '三道關卡' },
+  { id: 'ch-boss', glyph: '轉', label: '通往自由' },
+  { id: 'ch-epilogue', glyph: '終', label: '尾聲' },
+];
+
+// 第一關完整對話（收在「展開」裡）
+const stage1Dialogue = [
+  '「嗨新人，你叫巴非？我叫福蘭，你好你好。」',
+  '「剛剛那是兔貓前輩康帕爾對吧？哇你運氣真不好啊。康帕爾最討厭帶新人啦，不過他總是負責帶新人。所以他的態度就……不怎麼好了，哈哈。」',
+  '「你問佈告欄的規則？喔……它被貼在那邊，等午飯時間你自己去看一下吧。巴非，你……最好把它記住，不然會發生很可怕的事。」',
+  '「關於可怕的事情嗎？我也不太清楚呢。沒有人會知道，大家都很遵守規矩的。」',
+  '「嗯……不過聽說知道的人都消失啦，被工廠的影子大人抓走了。在夜深貓靜的夜晚，影子大人張開它的血盆大口，吃掉了違反規定的糟糕貓。」',
+  '「你好你好我是巴里特，哇你也是看見影子大人？哈哈哈影子大人帶我們到一個厲害的地方，是蠟燭阿哈哈哈，好多多多好多哈哈哈。我們？我們？我是莉莉安你是誰？我是我應該是，我在哪裡？」',
+];
+
+// 老闆的筆記：精選 5 則直接顯示，其餘收在「展開」裡
+const notesHighlight = [
+  '用陪伴伊始的毛絨生物來作為基準。嗯，叫做貓嗎……那蠟空殼便命其為貓蠟怪吧。',
+  '需要一座生態箱……蠟燭工廠如何？',
+  '不對勁，他們的靈魂有成功融合嗎，每天的對話都沒有變化……',
+  '從外部跑來了一個未知的靈魂，牠跑入了我放在一邊的特殊蠟中，我便安排他進入生態箱中生活，這可能是會成功的一個融合物！',
+];
+const notesFinal = '……看到這裡的未知的靈魂，你是從哪裡來的呢？';
+const notesMore = [
+  '外頭有很多靈魂……捉一些抽調融合，然後作觀察性研究。',
+  '不能讓牠們發現是生態箱呢，否則哪能叫完美的觀察？',
+  '真是期待，他們完全沒有任何懷疑，看來實驗很成功。',
+  '……實驗並不順利，雖然初始，在生態箱中那些融合物能做最一般的生活處理，卻似乎又少了幾分對未知的自由，循規蹈矩的。',
+  '不知多久，開始出現有融合物無法承受我的精神了，每隔一段時間就會失控、靈魂混亂。……是我的方向出現了錯誤嗎？',
+  '沒有任何一隻融合怪懷疑牠們的同事為何消失不見了。',
+  '有點好奇被汙染的融合怪接下來會如何，把牠們放到拉萊耶好了。',
+  '唉……究竟是哪裡出現了問題？是靈魂出現錯誤了嗎？',
+  '那個特殊融合物與其他實驗融合物差異甚廣，牠擁有極強大的好奇心，會自行去探索生態箱，甚至以自我的意識違反規則來到拉萊耶都市中……好奇一旦扎根，就會像植物一樣迅速生長。',
+  '快要來了……牠要來實驗區了！',
+  '你開啟了無數個世界不斷重來，你的好奇心得到滿足了嗎？',
+];
+
+const epilogueNotes = [
+  '牠打敗了我，逃脫出了生態箱。',
+  '自由的靈魂，來源未知，……還能無限復活。',
+  '一隻貓落入時光隧道，回到過去撞上了自己，因而使自己無法進入時光隧道。',
+];
+
+const Chevron = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" className="transition-transform group-open:rotate-90">
+    <path d="M9 6l6 6-6 6" />
+  </svg>
+);
+
+const Quote = ({ text, by, highlight }) => (
+  <Reveal as="blockquote" className="m-0 flex flex-col gap-3 rounded-2xl bg-surface px-6 py-7 md:px-8">
+    <p className={`t-quote ${highlight ? 'text-ember-light' : ''}`}>{text}</p>
+    <p className="t-caption">— {by}</p>
+  </Reveal>
+);
+
+// 章節：左側大字，右側內容；手機版上下排列
+const Chapter = ({ id, glyph, label, children }) => (
+  <section id={id} className="page-container flex scroll-mt-24 flex-col gap-8 border-t border-wax/[0.08] py-16 md:flex-row md:gap-16 lg:py-20">
+    <Reveal className="flex shrink-0 flex-row items-end gap-4 md:w-[200px] md:flex-col md:items-start md:gap-3">
+      <p className="t-glyph">{glyph}</p>
+      <p className="t-caption">{label}</p>
+    </Reveal>
+    <div className="flex min-w-0 flex-1 flex-col">{children}</div>
+  </section>
+);
+
+const StageTitle = ({ no, title }) => (
+  <Reveal className="flex flex-col gap-2.5">
+    <p className="t-overline">Stage 0{no} · 第{['一', '二', '三', '四'][no - 1]}關</p>
+    <h2 className="t-h1">{title}</h2>
+  </Reveal>
+);
 
 const Story = () => {
+  const jump = (id) => document.getElementById(id)?.scrollIntoView();
+
   return (
-    <section className="max-w-5xl px-6 py-12 text-center mx-auto">
-      <h1 className="text-4xl font-bold mb-4">
-        遊戲故事<br /><br />
-      </h1>
-      <p className="text-lg leading-[3.5rem] text-left">
-        起 : 緣由與背景<br />
-        這是其中一個平行世界。
-        <br />
-        於現今的19世紀初，人類已完全滅絕，
-        獨留豐富的大自然與生態、以及沉眠於南太平洋的邪神克蘇魯。
-        <br />
-        在人類還仍有的時代，甚至還未開啟世紀的時候，他們曾瘋狂崇拜沉睡之神，
-        借助著邪神的力量，為牠建造宏偉的石造都市與宮殿，其名為拉萊耶。
-        <br />
-        而因一些不知名原因，克蘇魯沉眠於拉萊耶，
-        乘載著拉萊耶的姆大陸也因星位變換沉入海底，而人類也在一次的意外之中徹底滅亡。
-        <br />
-        一個位於拉萊耶深處海底的不知名生物，一團類似影子的存在，
-        經由克蘇魯不經意的呼喚與操控，逐漸衍生出神智與意識，
-        隨著洋流的飄盪來到陸地並開啟了牠的旅途。
-        <br />
-        第一個遇到的生物便是貓。
-        <br />
-        然而因為長期接受克蘇魯的侵染，跟影子接觸過的生物會逐漸精神混亂並發瘋。
-        <br />
-        影子開始對掌控「精神」的「靈魂」產生好奇，牠想要找出一種不受牠精神污染的生物，
-        便決定回到故鄉拉萊耶，建造一個蠟燭工廠展開模擬實驗。
-        <br />
-        起初牠覺得是用來乘載靈魂的身體過於脆弱，所以才會輕易被精神污染，於是便利用特殊的蠟捏成所謂的「血肉身軀」，以第一眼見到的生物作為標準(雛鳥情節?)做出貓蠟怪。
-        然後再去陸地抓取動物，把靈魂剝離身體後塞入貓蠟怪中，而貓蠟怪也會因為每個不同的靈魂特性產生不同的外觀變異。影子在一開始覺得牠成功了，然而在一段時間後牠發現實驗體只會重複做機械性的動作(像是npc一般的npc)，察覺到不對，甚至過了一段時間後實驗體就會開始失控發瘋，做出無意義的舉動。
-        影子覺得是靈魂出現了問題，但牠找不到改進的方法。
-        <br /><br />
+    <>
+      <header className="page-container flex flex-col gap-6 pb-16 pt-24 lg:pt-32">
+        <Reveal as="p" className="t-overline">Story</Reveal>
+        <Reveal as="h1" className="t-display">遊戲故事</Reveal>
+        <Reveal as="p" className="t-lead max-w-[28em]">人類滅絕後，影子在沉沒的拉萊耶建起一座蠟燭工廠——一場沒有人知道自己身在其中的實驗。</Reveal>
+        <Reveal as="nav" aria-label="章節" className="mt-4 flex flex-wrap gap-2.5">
+          {chapters.map((c) => (
+            <button
+              key={c.id}
+              type="button"
+              onClick={() => jump(c.id)}
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-wax/[0.18] bg-transparent px-5 text-[15px] text-lead transition-colors hover:border-ember hover:text-ember-light"
+            >
+              <span className="font-serif font-black text-ember">{c.glyph}</span>
+              {c.label}
+            </button>
+          ))}
+        </Reveal>
+      </header>
 
-        承 : 主要的事件
-        <br />
-        (第一關--地底的蠟燭工廠)
-        <br />
-        巴非突然的甦醒，便被安排到蠟燭工廠入職，
-        經過兔貓前輩康帕爾的引導和稍為的介紹，
-        知道巴非是為了頂替突然離職的熊貓巴里特而來工作，
-        而工作內容則是日復一日地為蠟燭模具灌蠟。
-        <br />
-        「嗨新人，你叫巴非?」旁邊的鯊貓問。
-        <br />
-        「我叫福蘭，你好你好。」
-        <br />
-        「剛剛那是兔貓前輩康帕爾對吧?哇你運氣真不好啊。」
-        <br />
-        「你問為什麼?哈哈，因為康帕爾最討厭帶新人啦，不過他總是負責帶新人。」
-        <br />
-        「所以他的態度就......不怎麼好了，哈哈。」
-        <br />
-        「你問佈告欄的規則?喔......它被貼在那邊，等午飯時間你自己去看一下吧。」
-        <br />
-        福蘭抬掌指向房間的一角，緊張的看了一眼四周又低聲對巴非說道
-        「巴非，你......最好把它記住，不然會發生很可怕的事。」
-        <br />
-        「關於可怕的事情嗎?我也不太清楚呢。」福蘭歪了歪頭，
-        「沒有人會知道，大家都很遵守規矩的。」
-        <br />
-        「嗯......不過聽說知道的人都消失啦，被工廠的影子大人抓走了。」
-        福蘭緊張兮兮地說，「在夜深貓靜的夜晚，影子大人張開它的血盆大口，
-        吃掉了違反規定的糟糕貓。」
-        <br />
-        與一旁的熱心同事鯊貓福蘭交流過後，
-        知道了關於影子大人的傳說與各種的工廠小八卦，
-        巴非開始感覺到有些哪邊不對勁，於是萌生出逃離工廠的念頭。
-        <br />
-        通往工廠深處的路上，果不其然出現了許多奇怪的貓蠟怪，
-        它們看起來一點意識都沒有，皆憑著本能四處亂攻擊碰到的事物，
-        巴非除了擊敗它們別無選擇。
-        <br />
-        終於走到工廠的底部，巴非在電梯門口正要搭電梯時，
-        看見一隻鹿貓匆匆的從電梯出來，然而巴非並沒有特別注意，
-        牠走進電梯後發現還有一隻熊貓在電梯內。
-        <br />
-        而牠的樣子似乎並不太好。
-        <br />
-        巴非好奇地看了他一眼，在牠拍拍熊貓，詢問一下時電梯門緩緩的闔上。
-        <br />
-        「你好你好我是巴里特，哇你也是看見影子大人?
-        哈哈哈影子大人帶我們到一個厲害的地方，是蠟燭阿哈哈哈，
-        好多多多好多哈哈哈。我們?我們?我是莉莉安你是誰?我是我應該是，我在哪裡?」
-        熊貓雙眼亂轉，癲狂的笑容咧開，不停地喃喃自語。
-        <br />
-        熊貓扯著突然變出來的蛇尾巴，眼神一轉，盯著巴非面無表情道「不要違反規則。」
-        <br />
-        巴非查覺到不對勁，突然電梯一陣顫動，開始急速上升，
-        標示幾層樓的框框此刻被許多眼睛充滿著，而下方的眼睛按鈕亮著不詳的紅色光芒。
-        <br />
-        匡噹一聲，電梯門緩緩地打開，陰森詭譎的地方不屬於十層樓的任何一層，
-        熊貓趴咑趴咑的晃悠出來，瘋瘋癲癲的跑向深處。
-        <br />
-        (第二關--海下的拉萊耶都市)
-        <br />
-        巴非從工廠出來，卻抵達了一座石造都市中，移動的石板與出口似乎在高處，
-        巴非只能利用管線漏出來的乾冰與蠟製作出彈跳泡泡，來去往其他地方。
-        <br />
-        路途中除了更多的貓蠟怪，還有許多看起來跟熊貓巴里特一樣的動物蠟怪的存在，
-        而在中間有一片石壁描述著克蘇魯的降臨與人類的瘋狂崇拜，
-        以及位於最尾端滅絕的人類的壁畫。而在尾端的最後竟然還記述著影子的誕生，
-        並得知影子居然畏懼陽光，截止自此，巴非了解的還是不夠多。
-        <br />
-        最終在都市的最底處，宏偉華麗的教堂祭祀著邪神克蘇魯，
-        而巴非必須解出教堂的秘密才能前往到下一關。
-        <br />
-        (第三關--影子裡的實驗室)
-        <br />
-        打開了教堂的秘密大門，巴非來到一間陰暗詭異的實驗室，
-        貓蠟怪的密度直線上升，而動物蠟怪攻擊性也愈發兇猛，巴非必須對著火把吐蠟，
-        讓實驗室的能見度更廣，才能讓自己不會處於被動的空間。
-        <br />
-        實驗室中巴非發現許多製作貓蠟怪的鍋爐室以及製作動物蠟怪的房間，
-        也在一間小房間發現許多老闆的心得與筆記......。
-        <br />
-        -用陪伴伊始的毛絨生物來作為基準。
-        嗯，叫做貓嗎......那蠟空殼便命其為貓蠟怪吧。
-        <br />
-        -外頭有很多靈魂......捉一些抽調融合，然後作觀察性研究。
-        <br />
-        -需要一座生態箱......蠟燭工廠如何?。
-        <br />
-        -不能讓牠們發現是生態箱呢，否則哪能叫完美的觀察?
-        <br />
-        -真是期待，他們完全沒有任何懷疑，看來實驗很成功。
-        <br />
-        -......實驗並不順利，雖然初始，在生態箱中那些融合物能做最一般的生活處裡，
-        卻似乎又少了幾分對未知的自由，循規蹈矩的。
-        <br />
-        -不對勁，他們的靈魂有成功融合嗎，每天的對話都沒有變化......。
-        <br />
-        -不知多久，開始出現有融合物無法承受我的精神了，
-        每隔一段時間就會失控、靈魂混亂。......是我的方向出現了錯誤嗎?
-        <br />
-        -沒有任何一隻融合怪懷疑牠們的同事為何消失不見了。
-        <br />
-        -有點好奇被汙染的融合怪接下來會如何，把牠們放到拉萊耶好了。
-        <br />
-        -唉......究竟是哪裡出現了問題?是靈魂出現錯誤了嗎?
-        <br />
-        -從外部跑來了一個未知的靈魂，牠跑入了我放在一邊的特殊蠟中，
-        我便安排他進入生態箱中生活，這可能是會成功的一個融合物!
-        必須特別關注牠......派遣......好了。
-        <br />
-        -那個特殊融合物與其他實驗融合物差異甚廣，牠擁有極強大的好奇心，
-        會自行去探索生態箱，甚至以自我的意識違反規則來到拉萊耶都市中......
-        好奇一旦扎根，就會像植物一樣迅速生長。
-        <br />
-        -快要來了......牠要來實驗區了!
-        <br />
-        -......看到這裡的未知的靈魂，你是從哪裡來的呢?
-        <br />
-        -你開啟了無數個世界不斷重來，你的好奇心得到滿足了嗎?
-        <br />
-        老闆，也就是影子大人站在巴非的身後，開始追殺巴非。
-        <br /><br />
+      {/* 起 */}
+      <Chapter id="ch-origin" glyph="起" label="緣由與背景">
+        <div className="flex flex-col gap-7">
+          <Reveal as="h2" className="t-h1">影子的實驗</Reveal>
+          <Reveal as="p" className="t-lead max-w-[30em]">影子想知道：為什麼碰觸過牠的生物都會發瘋？牠猜，是承載靈魂的身體太脆弱了。</Reveal>
+          <Reveal as="p" className="t-body">於是牠用特殊的蠟，照著第一眼見到的生物，捏出了「貓蠟怪」，再把從陸地抓來的動物靈魂塞進去。每個靈魂，都讓貓蠟怪長出不同的模樣。</Reveal>
+          <Reveal as="p" className="t-body">起初一切順利。但實驗體只會重複機械性的動作，過一陣子，便開始失控發瘋。影子找不到原因。</Reveal>
+        </div>
+      </Chapter>
 
-        轉 : 特殊事件，Boss關卡
-        <br />
-        (第四關--通往自由的巴別塔)
-        <br />
-        巴非被追到一間寬廣的空間，老闆會召喚製作的貓蠟怪與動物蠟怪去攻擊巴非，
-        巴非必須利用之前學習的種種去打敗老闆。
-        <br />
-        除了召喚蠟怪，老闆還會去破壞地形，試圖阻擾巴非。
-        <br />
-        當巴非終於打敗了老闆，老闆會轉變為第二型態--影子大人追殺巴非，
-        此時的影子大人巴非不管怎們打都打不過，巴非只能轉身逃跑，
-        跑到這個空間之外的最底端，沒想到那裏是殘破的樓梯間，通往地面的通天塔，
-        巴非使用之前學到的彈跳泡泡拼命的朝上方跑去，而影子大人虎視眈眈的追擊在後。
-        <br />
-        直到最後巴非打破了通天塔的門，驟然闖到白日中天的地面，
-        影子大人在猝不及防之下的跟隨被燒死在最畏懼的陽光之中。
-        <br />
-        巴非終於逃離了地底，邁向自由的未來。
-        <br />
-        但在巴非走掉之後，影子大人的屍體卻動了動......。
-        <br /><br />
-      </p>
-      <p className="text-lg leading-[3.5rem] text-left">
-        -牠打敗了我，逃脫出了生態箱。<br />
-        -自由的靈魂，來源未知，......還能無限復活。<br />
-        -一隻貓落入時光隧道，回到過去撞上了自己，因而使自己無法進入時光隧道。<br />
-        -牠將是我最完美的實驗品。<br />
-      </p>
-    </section>
+      {/* 承 */}
+      <Chapter id="ch-stages" glyph="承" label="主要事件">
+        <div className="flex flex-col gap-24">
+          <article className="flex flex-col gap-6">
+            <StageTitle no={1} title="地底的蠟燭工廠" />
+            <Reveal className="flex flex-col items-center gap-6 sm:flex-row sm:gap-12">
+              <p className="t-body flex-1">巴非一醒來，就被兔貓前輩康帕爾帶進工廠，頂替突然離職的熊貓巴里特，日復一日為蠟燭模具灌蠟。熱心的鯊貓同事福蘭悄悄提醒牠：一定要記住佈告欄上的規則。</p>
+              <img src={img('p4_compal_idle.webp')} alt="兔貓前輩康帕爾" loading="lazy" className="h-[200px] w-[200px] shrink-0 object-contain" />
+            </Reveal>
+            <Quote text="「聽說知道的人都消失啦，被工廠的影子大人抓走了。」" by="鯊貓 福蘭" />
+            <Reveal as="p" className="t-body">往工廠深處的路上，滿是失去意識、見物就咬的貓蠟怪。好不容易走到電梯口，巴非卻在電梯裡遇見了瘋掉的巴里特。</Reveal>
+            <Quote text="「不要違反規則。」" by="熊貓 巴里特" highlight />
+            <Reveal as="p" className="t-body">電梯急速上升，樓層框裡擠滿了眼睛。門打開時，眼前的地方不屬於十層樓的任何一層。</Reveal>
+            <Reveal as="details" className="group border-t border-wax/[0.08] pt-2">
+              <summary className="inline-flex min-h-11 cursor-pointer list-none items-center gap-2 text-[15px] font-medium text-ember [&::-webkit-details-marker]:hidden">
+                <Chevron />展開完整對話
+              </summary>
+              <div className="flex flex-col gap-3 pb-2 pt-4">
+                {stage1Dialogue.map((line) => <p key={line} className="t-body">{line}</p>)}
+              </div>
+            </Reveal>
+          </article>
+
+          <article className="flex flex-col gap-6">
+            <StageTitle no={2} title="海下的拉萊耶都市" />
+            <Reveal>
+              <img src={img('P1_001.webp')} alt="黑暗中浮現無數發光的眼睛" loading="lazy" className="aspect-[21/9] w-full rounded-xl object-cover" />
+            </Reveal>
+            <Reveal as="p" className="t-body">巴非從工廠出來，卻抵達了一座石造都市。牠用管線漏出的乾冰與蠟做成彈跳泡泡，在移動的石板間前進。</Reveal>
+            <Reveal as="p" className="t-lead max-w-[30em]">石壁上的壁畫，記載著克蘇魯的降臨、人類的滅絕、影子的誕生——以及，<span className="text-ember-light">影子畏懼陽光</span>。</Reveal>
+            <Reveal as="p" className="t-body">都市最底處，是祭祀克蘇魯的華麗教堂。巴非必須解開教堂的秘密，才能繼續前進。</Reveal>
+          </article>
+
+          <article className="flex flex-col gap-6">
+            <StageTitle no={3} title="影子裡的實驗室" />
+            <Reveal as="p" className="t-body">教堂的秘密大門後，是陰暗的實驗室。巴非得對著火把吐蠟，才能照亮前路。在一間小房間裡，牠找到了老闆的筆記……</Reveal>
+
+            {/* 筆記本：淺色紙面 */}
+            <Reveal className="flex flex-col gap-5 rounded-2xl bg-wax px-6 py-10 text-[#2a2220] md:px-12">
+              <p className="m-0 font-latin text-[13px] tracking-[0.32em] text-ink">RESEARCH NOTES</p>
+              {notesHighlight.map((n) => (
+                <p key={n} className="m-0 font-serif text-[17px] leading-[1.85] md:text-lg">— {n}</p>
+              ))}
+              <p className="m-0 font-serif text-lg font-semibold leading-[1.85] text-ink md:text-xl">— {notesFinal}</p>
+              <details className="group border-t border-[#2a2220]/15 pt-2">
+                <summary className="inline-flex min-h-11 cursor-pointer list-none items-center gap-2 text-[15px] font-medium text-ink [&::-webkit-details-marker]:hidden">
+                  <Chevron />閱讀其餘 {notesMore.length} 則筆記
+                </summary>
+                <div className="flex flex-col gap-3 pb-1 pt-4 font-serif text-base leading-[1.85]">
+                  {notesMore.map((n) => <p key={n} className="m-0">— {n}</p>)}
+                </div>
+              </details>
+            </Reveal>
+
+            <Reveal as="p" className="t-h2 mt-4">身後，老闆——影子大人——出現了。</Reveal>
+          </article>
+        </div>
+      </Chapter>
+
+      {/* 轉 */}
+      <Chapter id="ch-boss" glyph="轉" label="Boss 關卡">
+        <div className="flex flex-col gap-7">
+          <StageTitle no={4} title="通往自由的巴別塔" />
+          <Reveal className="grid grid-cols-2 gap-4">
+            <div className="stage aspect-square"><img src={img('p4_Boss.webp')} alt="影子先生第一型態" loading="lazy" className="h-[88%] w-[88%] object-contain" /></div>
+            <div className="stage aspect-square"><img src={img('p4_Boss_pro.webp')} alt="影子大人第二型態" loading="lazy" className="h-[88%] w-[88%] object-contain" /></div>
+          </Reveal>
+          <Reveal as="p" className="t-body">老闆召喚蠟怪、破壞地形。好不容易擊敗牠，牠卻化為第二型態——影子大人，怎麼打都打不倒。巴非只能逃，沿著殘破的通天塔，用彈跳泡泡拚命往上。</Reveal>
+          <Reveal as="p" className="t-lead max-w-[30em]">巴非撞開塔門，衝進正午的陽光。緊追在後的影子大人，被燒死在牠最畏懼的光裡。</Reveal>
+        </div>
+      </Chapter>
+
+      {/* 尾聲 */}
+      <section id="ch-epilogue" className="flex scroll-mt-24 flex-col items-center gap-10 border-t border-wax/[0.08] px-4 pb-40 pt-36 text-center">
+        <Reveal as="p" className="t-overline">Epilogue</Reveal>
+        <Reveal as="p" className="t-h2">巴非終於逃離了地底，邁向自由的未來。</Reveal>
+        <Reveal as="p" className="t-lead">但在巴非走掉之後，影子大人的屍體，動了動……</Reveal>
+        <Reveal className="mt-8 flex flex-col gap-3.5">
+          {epilogueNotes.map((n) => <p key={n} className="t-quote text-body">— {n}</p>)}
+        </Reveal>
+        <Reveal as="p" className="m-0 max-w-[14em] font-serif text-[clamp(32px,4vw,56px)] font-black leading-[1.25] text-ember">
+          牠將是我最完美的實驗品。
+        </Reveal>
+      </section>
+    </>
   );
 };
 

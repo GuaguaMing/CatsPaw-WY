@@ -2,74 +2,168 @@
 @tailwind components;
 @tailwind utilities;
 
-
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: #fff;
-  background-color: #000;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: #000000;
-  color: #fff;
-
-  background:
-    #000000,
-    url('A_Cat_s_Paw_bg.png'),
-    linear-gradient(to top, rgba(0, 0, 0, 1)0%, rgba(0, 0, 0, 0)40%),
-    linear-gradient(to bottom, rgba(0, 0, 0, 1)0%, rgba(0, 0, 0, 0)20%);
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: contain;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.custom-padding {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
-.justify-around {
-  justify-content: space-around;
-}
-
-
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    background-color: #000000;
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    @apply bg-ground font-sans text-wax antialiased;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+/* ───────── 字級層級（規範見設計稿「字級與動效規範」） ───────── */
+@layer components {
+  /* 區段英文標籤 */
+  .t-overline {
+    @apply m-0 font-latin text-[13px] font-medium uppercase tracking-[0.32em] text-ember;
+  }
+
+  /* 頁面標題，每頁一個 */
+  .t-display {
+    @apply m-0 font-serif font-black tracking-[0.04em];
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1.15;
+  }
+
+  /* 區段標題、角色名 */
+  .t-h1 {
+    @apply m-0 font-serif font-black tracking-[0.02em];
+    font-size: clamp(30px, 3.2vw, 46px);
+    line-height: 1.25;
+  }
+
+  /* 小標、轉折句 */
+  .t-h2 {
+    @apply m-0 font-serif font-semibold;
+    font-size: clamp(22px, 2vw, 30px);
+    line-height: 1.4;
+  }
+
+  /* 卡片標題、按鍵名稱 */
+  .t-h3 {
+    @apply m-0 text-lg font-bold leading-normal lg:text-xl;
+  }
+
+  /* 導言：一句話，最多兩句 */
+  .t-lead {
+    @apply m-0 text-lead;
+    font-size: clamp(17px, 1.35vw, 20px);
+    line-height: 1.9;
+  }
+
+  /* 內文：每段最多三句，行寬 ≤ 34 字 */
+  .t-body {
+    @apply m-0 max-w-[34em] text-base text-body;
+    line-height: 1.95;
+  }
+
+  /* 引言出處、圖說 */
+  .t-caption {
+    @apply m-0 text-sm leading-relaxed text-muted;
+  }
+
+  /* 對白、筆記摘錄 */
+  .t-quote {
+    @apply m-0 font-serif font-semibold text-wax;
+    font-size: clamp(18px, 1.5vw, 22px);
+    line-height: 1.75;
+  }
+
+  /* 角色英文名 */
+  .t-latin {
+    @apply m-0 font-latin font-bold tracking-[0.14em] text-ember;
+    font-size: clamp(16px, 1.3vw, 20px);
+  }
+
+  /* 故事頁「起承轉」大字 */
+  .t-glyph {
+    @apply m-0 font-serif font-black leading-none text-ember/85;
+    font-size: clamp(72px, 9vw, 132px);
+  }
+
+  .page-container {
+    @apply mx-auto box-border w-full max-w-page px-4 md:px-8 lg:px-14;
+  }
+
+  .card {
+    @apply rounded-2xl border border-wax/[0.08] bg-surface;
+  }
+
+  /* 角色、Boss 圖的燭光舞台 */
+  .stage {
+    @apply flex items-center justify-center rounded-[20px];
+    background: radial-gradient(circle at 50% 60%, #2a1c14 0%, #161213 72%);
+  }
+
+  .tag {
+    @apply inline-flex min-h-8 items-center rounded-full bg-ember/10 px-3.5 text-sm text-ember-light;
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-[52px] items-center gap-2.5 rounded-full border-0 bg-ember px-7 text-[17px] font-bold text-[#1a1008] transition-transform hover:scale-[1.03] active:scale-[0.97];
+  }
+
+  .btn-ghost {
+    @apply inline-flex min-h-[52px] items-center gap-2.5 rounded-full border border-wax/35 px-7 text-[17px] font-medium text-wax no-underline transition-colors hover:border-ember hover:text-ember-light;
+  }
+
+  /* 液態玻璃內光（沿用原 LiquidButton 的質感） */
+  .liquid-glow {
+    box-shadow:
+      inset 4px 4px 12px rgba(255, 255, 255, 0.12),
+      inset -4px -6px 12px rgba(255, 159, 115, 0.35),
+      inset 0 0 0 1px rgba(240, 163, 94, 0.45);
+  }
+}
+
+/* ───────── 動效：由下往上淡入 ───────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(48px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(48px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* 切換角色時的進場 */
+.swap-in {
+  animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .swap-in {
+    animation: none;
   }
 }

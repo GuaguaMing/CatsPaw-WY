@@ -1,28 +1,27 @@
-import { useState } from "react";
+import { lazy } from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import Nav from "./components/Nav";
-import CatRow from "./components/CatRow";
-import Footer from "./components/Footer";
+import Layout from "./components/Layout";
 import Home from "./pages/Home";
-import Story from "./pages/Story";
-import Guide from "./pages/Guide";
-import Character from "./pages/Character";
-import Scene from "./pages/Scene";
-import Designtoy from "./pages/Designtoy";
-import "./App.css";
+
+// 首頁直接載入，其他頁面切成獨立檔案，進入該頁才下載
+const Story = lazy(() => import("./pages/Story"));
+const Guide = lazy(() => import("./pages/Guide"));
+const Character = lazy(() => import("./pages/Character"));
+const Scene = lazy(() => import("./pages/Scene"));
+const Designtoy = lazy(() => import("./pages/Designtoy"));
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<><Home /><CatRow /><Footer /></>} />
-        <Route path="/story" element={<><Nav /><Story /><CatRow /><Footer /></>} />
-        <Route path="/guide" element={<><Nav /><Guide /><CatRow /><Footer /></>} />
-        <Route path="/character" element={<><Nav /><Character /><CatRow /><Footer /></>} />
-        <Route path="/scene" element={<><Nav /><Scene /><CatRow /><Footer /></>} />
-        <Route path="/designtoy" element={<><Nav /><Designtoy /><CatRow /><Footer /></>} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/story" element={<Story />} />
+          <Route path="/guide" element={<Guide />} />
+          <Route path="/character" element={<Character />} />
+          <Route path="/scene" element={<Scene />} />
+          <Route path="/designtoy" element={<Designtoy />} />
+        </Route>
       </Routes>
     </Router>
   );

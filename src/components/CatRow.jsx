@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { img } from '../lib/asset';
 
 const CatRow = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 450) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
+    const handleScroll = () => setIsVisible(window.scrollY > 450);
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -26,22 +21,25 @@ const CatRow = () => {
   };
 
   return (
-    <div
+    <button
+      type="button"
+      onClick={handleClick}
+      aria-label="回到頂端"
+      tabIndex={isVisible ? 0 : -1}
       className={`
-        fixed z-50 transition-all duration-500 ease-in-out
-        ${isVisible ? 'bottom-10 opacity-100 translate-y-0' : 'bottom-4 opacity-0 translate-y-10'}
+        fixed right-4 z-40 w-20 border-0 bg-transparent p-0 text-wax transition-all duration-500 ease-in-out md:right-12 md:w-32
+        ${isVisible ? 'bottom-6 translate-y-0 opacity-100' : 'pointer-events-none bottom-2 translate-y-10 opacity-0'}
         ${isAnimatingOut ? '-translate-y-40 opacity-0' : ''}
-        right-20 w-40
       `}
     >
       <img
-        src={`${import.meta.env.BASE_URL}images/p4_catrow.gif`}
-        alt="Cat Row"
-        className="w-40 h-auto transition-transform duration-500 ease-in-out hover:scale-125 cursor-pointer"
-        onClick={handleClick}
+        src={img('p4_catrow.webp')}
+        alt=""
+        loading="lazy"
+        className="h-auto w-full transition-transform duration-500 ease-in-out hover:scale-110"
       />
-      <p className="text-center mt-2 text-lg font-medium transition-all duration-30">TOP</p>
-    </div>
+      <span className="mt-1 block text-center font-latin text-sm font-bold tracking-[0.2em]">TOP</span>
+    </button>
   );
 };
 

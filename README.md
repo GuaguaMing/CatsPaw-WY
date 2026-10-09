@@ -1,3 +1,16 @@
+# Cat's Paw 官網
+
+## 圖片
+
+原始圖檔放在 `raw-images/`（不會部署），網站用的是轉好的 WebP（`public/images/*.webp`）。
+新增或替換圖片後執行：
+
+```bash
+npm run optimize:images
+```
+
+各圖的最大寬度設定在 `scripts/optimize-images.mjs` 的 `WIDTHS`。
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
