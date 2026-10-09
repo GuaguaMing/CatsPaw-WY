@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
-import { img, youtubeEmbed } from '../lib/asset';
+import VideoModal from '../components/VideoModal';
+import { img } from '../lib/asset';
 
 const worldBeats = [
   { still: 'P1_001.webp', alt: '黑暗中浮現無數發光的眼睛', title: '人類滅絕之後', text: '這是其中一個平行世界。19 世紀初，人類已完全滅絕，只剩下大自然，與沉眠於南太平洋的邪神克蘇魯。' },
@@ -27,36 +28,6 @@ const Arrow = () => (
     <path d="M5 12h14M13 6l6 6-6 6" />
   </svg>
 );
-
-// 預告片：按下才載入，Esc 或點背景關閉
-const TrailerModal = ({ onClose }) => {
-  useEffect(() => {
-    const onKey = (e) => e.key === 'Escape' && onClose();
-    document.addEventListener('keydown', onKey);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = '';
-    };
-  }, [onClose]);
-
-  return (
-    <div role="dialog" aria-modal="true" aria-label="Cat's Paw 預告片" className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4" onClick={onClose}>
-      <div className="relative w-full max-w-6xl" onClick={(e) => e.stopPropagation()}>
-        <button type="button" onClick={onClose} aria-label="關閉預告片" className="absolute -top-14 right-0 inline-flex h-11 w-11 items-center justify-center rounded-full border border-wax/30 bg-transparent text-wax hover:border-ember">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
-        </button>
-        <iframe
-          src={youtubeEmbed('MyuN-mGBT7A')}
-          title="Cat's Paw 預告片"
-          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-          allowFullScreen
-          className="aspect-video w-full rounded-xl border-0 bg-black"
-        />
-      </div>
-    </div>
-  );
-};
 
 const Home = () => {
   const [trailerOpen, setTrailerOpen] = useState(false);
@@ -182,7 +153,7 @@ const Home = () => {
         </div>
       </section>
 
-      {trailerOpen && <TrailerModal onClose={() => setTrailerOpen(false)} />}
+      {trailerOpen && <VideoModal youtubeId="MyuN-mGBT7A" title="Cat's Paw 預告片" onClose={() => setTrailerOpen(false)} />}
     </>
   );
 };

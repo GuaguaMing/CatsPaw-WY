@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Reveal from '../components/Reveal';
+import VideoModal from '../components/VideoModal';
 import { img } from '../lib/asset';
 
 // hero：大圖（與文字並排）；media：下方的動作／型態格；others：只有圖的圖庫
@@ -136,13 +137,20 @@ const Detail = ({ c }) => {
 
 const Character = () => {
   const [selId, setSelId] = useState('parfait');
+  const [videoOpen, setVideoOpen] = useState(false);
   const selected = characters.find((c) => c.id === selId);
 
   return (
     <>
       <header className="page-container flex flex-col gap-6 pb-12 pt-24 lg:pt-32">
         <Reveal as="p" className="t-overline">Characters</Reveal>
-        <Reveal as="h1" className="t-display">遊戲角色</Reveal>
+        <Reveal className="flex flex-wrap items-center gap-x-8 gap-y-4">
+          <h1 className="t-display">遊戲角色</h1>
+          <button type="button" className="btn-ghost" onClick={() => setVideoOpen(true)}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" /></svg>
+            角色介紹
+          </button>
+        </Reveal>
         <Reveal as="p" className="t-lead max-w-[28em]">工廠裡的每一隻，都是影子用貓、蠟與某個靈魂捏出來的。</Reveal>
       </header>
 
@@ -171,6 +179,8 @@ const Character = () => {
       <section aria-live="polite" className="page-container pb-36">
         <Detail key={selected.id} c={selected} />
       </section>
+
+      {videoOpen && <VideoModal youtubeId="IWzHx1-6hMQ" title="角色介紹影片" onClose={() => setVideoOpen(false)} />}
     </>
   );
 };
